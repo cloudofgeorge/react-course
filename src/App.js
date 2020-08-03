@@ -10,9 +10,9 @@ function App() {
           Hello world
         </h1>
       </header>
-        <Product name='Avocado' count='10'>
-            Avocados make just about anything better, from salads to veggie-packed salsas to smoothies. Smear avocados onto toast, mash 'em into guacamole, or top your morning eggs with a couple slices
-        </Product>
+      <Product name='Avocado' count='10'>
+          Avocados make just about anything better, from salads to veggie-packed salsas to smoothies. Smear avocados onto toast, mash 'em into guacamole, or top your morning eggs with a couple slices
+      </Product>
     </div>
   );
 }
