@@ -17,7 +17,11 @@ class App extends React.Component {
   };
 
   addToCartHandler = (id, name) => {
-    this.setState((prevState) => ({ cart: [...prevState.cart, { id, name }] }));
+    if (!this.state.cart.find((item) => item.id === id)) {
+      this.setState((prevState) => ({
+        cart: [...prevState.cart, { id, name }],
+      }));
+    }
   };
 
   render() {
@@ -40,7 +44,7 @@ class App extends React.Component {
         <div>
           <div>Cart:</div>
           {this.state.cart.map((item) => (
-            <div>{item.name}</div>
+            <div key={item.id}>{item.name}</div>
           ))}
         </div>
       </div>
