@@ -1,9 +1,10 @@
 import React from 'react';
 import './Product.css';
 
-const Product = () => (
+const Product = props => (
     <div className="product">
-        <div>This is product</div>
+        <div>Product: {props.name}</div>
+        <div>Count: {props.count}</div>
         <button>Buy</button>
     </div>
 );

@@ -10,7 +10,7 @@ function App() {
           Hello world
         </h1>
       </header>
-      <Product />
+      <Product name='Avocado' count='10' />
     </div>
   );
 }
