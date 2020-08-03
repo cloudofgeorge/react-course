@@ -12,8 +12,8 @@ class App extends React.Component {
     cart: [],
   };
 
-  changePageTitleHandler = () => {
-    this.setState({ pageTitle: "Products list" });
+  changePageTitleHandler = (event) => {
+    this.setState({ pageTitle: event.target.value });
   };
 
   addToCartHandler = (id, name) => {
@@ -30,7 +30,11 @@ class App extends React.Component {
         <header>
           <h1>{this.state.pageTitle}</h1>
         </header>
-        <button onClick={this.changePageTitleHandler}>Change title</button>
+        <input
+          type="text"
+          value={this.state.pageTitle}
+          onChange={this.changePageTitleHandler}
+        />
         <div>
           {this.state.products.map((item) => (
             <Product
