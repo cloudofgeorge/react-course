@@ -9,7 +9,6 @@ class App extends React.Component {
       { id: 0, name: "Avocado", count: 10 },
       { id: 1, name: "Bread", count: 5 },
     ],
-    cart: [],
   };
 
   changePageTitleHandler = () => {
