@@ -1,8 +1,7 @@
 import React from 'react';
-import './Product.css';
 
 const Product = () => (
-    <div className="product">
+    <div>
         <div>This is product</div>
         <button>Buy</button>
     </div>
