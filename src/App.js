@@ -48,7 +48,15 @@ class App extends React.Component {
             />
           ))}
         </div>
-        <div>
+        <div style={{
+              width: '100%',
+              display: "block",
+              padding: '10px',
+              maxWidth: '50%',
+              margin: '0 auto',
+              borderRadius: '5px',
+              border: '1px solid'
+          }}>
           <div>Cart:</div>
           {this.state.cart.map((item) => (
               <div key={item.id}>
