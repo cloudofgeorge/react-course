@@ -41,10 +41,11 @@ class App extends React.Component {
         <div>
           {this.state.products.map((item) => (
             <Product
-              key={item.id}
-              name={item.name}
-              count={item.count}
-              addToCart={() => this.addToCartHandler(item.id, item.name)}
+                key={item.id}
+                name={item.name}
+                count={item.count}
+                addToCart={() => this.addToCartHandler(item.id, item.name)}
+                inCart={this.state.cart.find(cartItem => cartItem.id === item.id)}
             />
           ))}
         </div>
