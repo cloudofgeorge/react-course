@@ -1,13 +1,14 @@
 import React from "react";
-import "./Product.scss";
+import styles from "./Product.module.scss";
 
 const Product = (props) => {
-    const classNames = ['product'];
+    const classNames = [styles.product];
 
     if (props.inCart) {
-        classNames.push('inCart');
+        classNames.push(styles.inCart);
     }
 
+    console.log(styles)
     return (
         <div className={classNames.join(' ')}>
             <div>Product: {props.name}</div>

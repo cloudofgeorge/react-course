@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.scss";
+import styles from "./App.module.scss";
 import Product from "./Product";
 
 class App extends React.Component {
@@ -33,8 +33,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header>
+      <div className={styles.app}>
+        <header className={styles.header}>
           <h1>{this.state.pageTitle}</h1>
         </header>
         <button onClick={this.changePageTitleHandler}>Change title</button>
