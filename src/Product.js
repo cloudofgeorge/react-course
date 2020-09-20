@@ -1,5 +1,5 @@
 import React from "react";
-import "./Product.css";
+import "./Product.scss";
 
 const Product = (props) => {
     const classNames = ['product'];
