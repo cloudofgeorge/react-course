@@ -25,11 +25,11 @@ class App extends React.Component {
   };
 
   removeFromCartHandler = (id) => {
-      const filteredArray = this.state.cart.filter(item => item.id !== id);
-      this.setState({
-          cart: filteredArray,
-      });
-  }
+    const filteredArray = this.state.cart.filter((item) => item.id !== id);
+    this.setState({
+      cart: filteredArray,
+    });
+  };
 
   render() {
     return (
@@ -41,31 +41,37 @@ class App extends React.Component {
         <div>
           {this.state.products.map((item) => (
             <Product
-                key={item.id}
-                name={item.name}
-                count={item.count}
-                addToCart={() => this.addToCartHandler(item.id, item.name)}
-                inCart={this.state.cart.find(cartItem => cartItem.id === item.id)}
+              key={item.id}
+              name={item.name}
+              count={item.count}
+              addToCart={() => this.addToCartHandler(item.id, item.name)}
+              inCart={this.state.cart.find(
+                (cartItem) => cartItem.id === item.id
+              )}
             />
           ))}
         </div>
-          <div style={{
-              width: '100%',
-              display: "block",
-              padding: '10px',
-              maxWidth: '50%',
-              margin: '0 auto',
-              borderRadius: '5px',
-              border: '1px solid'
-          }}>
-              <div>Cart:</div>
-              {this.state.cart.map((item) => (
-                  <div key={item.id}>
-                      <span>{item.name}</span>
-                      <button onClick={() => this.removeFromCartHandler(item.id)}>remove</button>
-                  </div>
-              ))}
-          </div>
+        <div
+          style={{
+            width: "100%",
+            display: "block",
+            padding: "10px",
+            maxWidth: "50%",
+            margin: "0 auto",
+            borderRadius: "5px",
+            border: "1px solid",
+          }}
+        >
+          <div>Cart:</div>
+          {this.state.cart.map((item) => (
+            <div key={item.id}>
+              <span>{item.name}</span>
+              <button onClick={() => this.removeFromCartHandler(item.id)}>
+                remove
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
