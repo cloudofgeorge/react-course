@@ -8,7 +8,6 @@ const Product = (props) => {
         classNames.push(styles.inCart);
     }
 
-    console.log(styles)
     return (
         <div className={classNames.join(' ')}>
             <div>Product: {props.name}</div>
