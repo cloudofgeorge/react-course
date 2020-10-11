@@ -1,21 +1,38 @@
 import React from "react";
 import styles from "./Product.module.scss";
 
-const Product = (props) => {
-  const classNames = [styles.product];
+class Product extends React.Component {
+  componentDidUpdate(prevProps) {
+    console.log("Product - component did update", prevProps, this.props);
 
-  if (props.inCart) {
-    classNames.push(styles.inCart);
+    if (this.props.inCart !== prevProps.inCart) {
+      console.log(
+        "Product - this.props.inCart !== prevProps",
+        prevProps.inCart,
+        this.props.inCart
+      );
+    }
   }
 
-  return (
-    <div className={classNames.join(" ")}>
-      <div>Product: {props.name}</div>
-      <div>Count: {props.count}</div>
-      <div>description: {props.children}</div>
-      <button onClick={props.addToCart}>Buy</button>
-    </div>
-  );
-};
+  shouldComponentUpdate(nextProps) {
+    return nextProps.inCart !== this.props.inCart;
+  }
+
+  render() {
+    const classNames = [styles.product];
+
+    if (this.props.inCart) {
+      classNames.push(styles.inCart);
+    }
+    return (
+      <div className={classNames.join(" ")}>
+        <div>Product: {this.props.name}</div>
+        <div>Count: {this.props.count}</div>
+        <div>description: {this.props.children}</div>
+        <button onClick={this.props.addToCart}>Buy</button>
+      </div>
+    );
+  }
+}
 
 export default Product;

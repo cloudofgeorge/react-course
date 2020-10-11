@@ -1,8 +1,14 @@
 import React from "react";
 import styles from "./App.module.scss";
 import Product from "./Product";
+import Cart from "./Cart";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log("App constructor");
+  }
+
   state = {
     pageTitle: "My App",
     products: [
@@ -31,7 +37,13 @@ class App extends React.Component {
     });
   };
 
+  componentDidMount() {
+    console.log("App component did mount");
+  }
+
   render() {
+    console.log("render");
+
     return (
       <div className={styles.app}>
         <header className={styles.header}>
@@ -62,15 +74,10 @@ class App extends React.Component {
             border: "1px solid",
           }}
         >
-          <div>Cart:</div>
-          {this.state.cart.map((item) => (
-            <div key={item.id}>
-              <span>{item.name}</span>
-              <button onClick={() => this.removeFromCartHandler(item.id)}>
-                remove
-              </button>
-            </div>
-          ))}
+          <Cart
+            data={this.state.cart}
+            removeFromCart={this.removeFromCartHandler}
+          />
         </div>
       </div>
     );
