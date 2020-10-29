@@ -12,7 +12,12 @@ class App extends React.Component {
       { id: 1, name: "Bread", count: 5 },
     ],
     cart: [],
+    inputData: "",
   };
+
+  componentDidMount() {
+    this.inputRef.focus();
+  }
 
   addToCartHandler = (id, name) => {
     if (!this.state.cart.find((item) => item.id === id)) {
@@ -27,6 +32,10 @@ class App extends React.Component {
     this.setState({
       cart: filteredArray,
     });
+  };
+
+  handleChange = (event) => {
+    this.setState({ inputData: event.target.value });
   };
 
   render() {
@@ -57,6 +66,14 @@ class App extends React.Component {
             data={this.state.cart}
             removeFromCart={this.removeFromCartHandler}
           />
+
+          <input
+            type="text"
+            value={this.state.inputData}
+            onChange={this.handleChange}
+            ref={(ref) => (this.inputRef = ref)}
+          />
+          {this.state.inputData}
         </div>
       </ErrorBoundary>
     );
