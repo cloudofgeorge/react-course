@@ -1,10 +1,6 @@
 import React from "react";
 
 class CartItem extends React.Component {
-  componentWillUnmount() {
-    console.log("CartItem - component will unmount");
-  }
-
   render() {
     return (
       <>

@@ -33,13 +33,7 @@ class App extends React.Component {
     });
   };
 
-  componentDidMount() {
-    console.log("App component did mount");
-  }
-
   render() {
-    console.log("render");
-
     return (
       <ErrorBoundary>
         <div className={styles.app}>
