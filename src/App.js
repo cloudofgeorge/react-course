@@ -2,13 +2,9 @@ import React from "react";
 import styles from "./App.module.scss";
 import Product from "./Product";
 import Cart from "./Cart";
+import ErrorBoundary from "./ErrorBoundary";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("App constructor");
-  }
-
   state = {
     pageTitle: "My App",
     products: [
@@ -45,41 +41,32 @@ class App extends React.Component {
     console.log("render");
 
     return (
-      <div className={styles.app}>
-        <header className={styles.header}>
-          <h1>{this.state.pageTitle}</h1>
-        </header>
-        <button onClick={this.changePageTitleHandler}>Change title</button>
-        <div>
-          {this.state.products.map((item) => (
-            <Product
-              key={item.id}
-              name={item.name}
-              count={item.count}
-              addToCart={() => this.addToCartHandler(item.id, item.name)}
-              inCart={this.state.cart.find(
-                (cartItem) => cartItem.id === item.id
-              )}
-            />
-          ))}
-        </div>
-        <div
-          style={{
-            width: "100%",
-            display: "block",
-            padding: "10px",
-            maxWidth: "50%",
-            margin: "0 auto",
-            borderRadius: "5px",
-            border: "1px solid",
-          }}
-        >
+      <ErrorBoundary>
+        <div className={styles.app}>
+          <header className={styles.header}>
+            <h1>{this.state.pageTitle}</h1>
+          </header>
+          <button onClick={this.changePageTitleHandler}>Change title</button>
+          <div>
+            {this.state.products.map((item) => (
+              <Product
+                key={item.id}
+                name={item.name}
+                count={item.count}
+                addToCart={() => this.addToCartHandler(item.id, item.name)}
+                inCart={this.state.cart.find(
+                  (cartItem) => cartItem.id === item.id
+                )}
+              />
+            ))}
+          </div>
+
           <Cart
             data={this.state.cart}
             removeFromCart={this.removeFromCartHandler}
           />
         </div>
-      </div>
+      </ErrorBoundary>
     );
   }
 }
