@@ -4,8 +4,6 @@ import styles from "./Cart.module.scss";
 
 class Cart extends React.Component {
   render() {
-    // Fake error
-    throw new Error("");
     return (
       <div className={styles.cart}>
         <div>Cart:</div>
