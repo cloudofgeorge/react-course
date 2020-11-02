@@ -4,6 +4,8 @@ import Product from "./Product";
 import Cart from "./Cart";
 import ErrorBoundary from "./ErrorBoundary";
 import withWindowSize from "./hoc/withWindowSize";
+import { Layout } from "./Layout";
+import { ThemeContext, themes } from "./theme-context";
 
 class App extends React.Component {
   state = {
@@ -13,11 +15,8 @@ class App extends React.Component {
     ],
     cart: [],
     inputData: "",
+    theme: "light",
   };
-
-  componentDidMount() {
-    this.inputRef.focus();
-  }
 
   addToCartHandler = (id, name) => {
     if (!this.state.cart.find((item) => item.id === id)) {
@@ -34,47 +33,49 @@ class App extends React.Component {
     });
   };
 
-  handleChange = (event) => {
-    this.setState({ inputData: event.target.value });
+  changeThemeHandler = (event) => {
+    this.setState({
+      theme: event.target.value,
+    });
   };
 
   render() {
-    const { isMobile } = this.props;
     return (
       <ErrorBoundary>
-        <div className={styles.app}>
-          {!isMobile && (
-            <header className={styles.header}>
-              <h1>Products list</h1>
-            </header>
-          )}
-          <div>
-            {this.state.products.map((item) => (
-              <Product
-                key={item.id}
-                name={item.name}
-                count={item.count}
-                addToCart={() => this.addToCartHandler(item.id, item.name)}
-                inCart={this.state.cart.find(
-                  (cartItem) => cartItem.id === item.id
-                )}
+        <ThemeContext.Provider value={this.state.theme}>
+          <Layout>
+            <div className={styles.app}>
+              <div>
+                <span>Theme: </span>
+                <select onChange={this.changeThemeHandler}>
+                  {Object.keys(themes).map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                {this.state.products.map((item) => (
+                  <Product
+                    key={item.id}
+                    name={item.name}
+                    count={item.count}
+                    addToCart={() => this.addToCartHandler(item.id, item.name)}
+                    inCart={this.state.cart.find(
+                      (cartItem) => cartItem.id === item.id
+                    )}
+                  />
+                ))}
+              </div>
+
+              <Cart
+                data={this.state.cart}
+                removeFromCart={this.removeFromCartHandler}
               />
-            ))}
-          </div>
-
-          <Cart
-            data={this.state.cart}
-            removeFromCart={this.removeFromCartHandler}
-          />
-
-          <input
-            type="text"
-            value={this.state.inputData}
-            onChange={this.handleChange}
-            ref={(ref) => (this.inputRef = ref)}
-          />
-          {this.state.inputData}
-        </div>
+            </div>
+          </Layout>
+        </ThemeContext.Provider>
       </ErrorBoundary>
     );
   }
