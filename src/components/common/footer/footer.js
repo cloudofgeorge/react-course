@@ -4,6 +4,6 @@ import { Wrapper } from "../../ui/wrapper";
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <Wrapper>footer</Wrapper>
+    <Wrapper>footer content</Wrapper>
   </footer>
 );
