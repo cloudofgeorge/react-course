@@ -2,13 +2,15 @@ import React from "react";
 import styles from "./header.module.scss";
 import { Wrapper } from "../../ui/wrapper";
 import { Cart } from "./cart";
-import { Logo } from "./logo/logo";
+import { Logo } from "./logo";
+import { Navigation } from "./navigation";
 
 export const Header = () => (
   <header className={styles.header}>
     <Wrapper className={styles.wrapper}>
-      <div>
+      <div className={styles.leftSide}>
         <Logo />
+        <Navigation />
       </div>
       <div>
         <Cart />
