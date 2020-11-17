@@ -2,31 +2,36 @@ import React from "react";
 import { ErrorBoundary } from "./error-boundary";
 import { Layout } from "./components/common/layout";
 import { PRODUCTS_LIMIT } from "./constants";
-import { ProductsList } from "./components/products/products-list";
+import { ProductsList, ProductsFilters } from "./components/products";
 import { CartContext } from "./context";
 import { api } from "./api";
 
 class AppView extends React.Component {
   state = {
+    categories: [],
     products: {
       data: [],
       isFetching: false,
       error: null,
     },
     cart: [],
+    filter: "all",
   };
 
   componentDidMount() {
     this.getProducts();
+    this.getCategories();
   }
 
-  getProducts = () => {
+  getProducts = (categoryName) => {
     this.setState((prevState) => ({
       products: { ...prevState.products, isFetching: true },
     }));
 
+    const url = categoryName ? `products/category/${categoryName}` : "products";
+
     api
-      .get("products", {
+      .get(url, {
         limit: PRODUCTS_LIMIT,
       })
       .then((result) => {
@@ -46,28 +51,55 @@ class AppView extends React.Component {
       });
   };
 
-  toggleCartHandler = (id) => {
+  changeFilter = (event) => {
+    const value = event.target.value;
+
+    this.setState({ filter: value });
+
+    this.getProducts(value !== "all" ? value : null);
+  };
+
+  getCategories = () => {
+    this.setState({
+      categories: ["men clothing", "electronics", "jewelery", "women clothing"],
+    });
+  };
+
+  toggleCartHandler = (product) => {
+    console.log(product);
     this.setState((prevState) => {
-      if (this.state.cart.find((item) => item === id)) {
-        const filteredArray = this.state.cart.filter((item) => item !== id);
+      if (this.state.cart.find(({ id }) => id === product.id)) {
+        const filteredArray = this.state.cart.filter(
+          ({ id }) => id !== product.id
+        );
         return { cart: filteredArray };
       } else {
-        return { cart: [...prevState.cart, id] };
+        return { cart: [...prevState.cart, product] };
       }
     });
   };
 
   render() {
-    const { products, cart } = this.state;
-
-    const productsInCart = products.data.filter(({ id }) => cart.includes(id));
+    const { categories, products, cart, filter } = this.state;
 
     return (
       <ErrorBoundary>
         <CartContext.Provider
-          value={{ productsInCart, removeFromCart: this.toggleCartHandler }}
+          value={{
+            productsInCart: cart,
+            removeFromCart: this.toggleCartHandler,
+          }}
         >
-          <Layout>
+          <Layout
+            aside={
+              <ProductsFilters
+                title="Types"
+                data={categories}
+                filter={filter}
+                onChange={this.changeFilter}
+              />
+            }
+          >
             {products.isFetching && "loading"}
             {!products.isFetching && !products.error && (
               <ProductsList

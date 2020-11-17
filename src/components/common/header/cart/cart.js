@@ -32,7 +32,7 @@ class CartView extends React.Component {
             {productsInCart.map((item) => (
               <div key={item.id} className={styles.cartItem}>
                 <span className={styles.cartItemName}>{item.title}</span>
-                <button onClick={() => removeFromCart(item.id)}>x</button>
+                <button onClick={() => removeFromCart(item)}>x</button>
               </div>
             ))}
           </div>

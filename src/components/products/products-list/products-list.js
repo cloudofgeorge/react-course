@@ -9,8 +9,8 @@ export const ProductsList = ({ products, toggleCart, cart }) => {
         <Product
           key={product.id}
           toggleCart={toggleCart}
-          inCart={cart.includes(product.id)}
-          {...product}
+          inCart={cart.find(item => item.id === product.id)}
+          product={product}
         />
       ))}
     </div>
