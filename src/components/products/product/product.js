@@ -3,7 +3,7 @@ import styles from "./product.module.scss";
 import { PRICE_SYMBOL } from "../../../constants";
 
 export const Product = ({ product, toggleCart, inCart }) => {
-  const { id, title, image, price } = product;
+  const { title, image, price } = product;
   return (
     <div className={styles.product}>
       <picture>
