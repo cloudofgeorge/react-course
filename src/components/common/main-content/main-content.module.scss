@@ -1,5 +1,9 @@
 .mainContent {
-  display: grid;
-  grid-column-gap: 70px;
-  grid-template-columns: 230px calc(100% - 300px);
+  display: block;
+
+  &.withAside {
+    display: grid;
+    grid-column-gap: 70px;
+    grid-template-columns: 230px calc(100% - 300px);
+  }
 }

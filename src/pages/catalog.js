@@ -65,7 +65,6 @@ class CatalogPageView extends React.Component {
   };
 
   toggleCartHandler = (product) => {
-    console.log(product);
     this.setState((prevState) => {
       if (this.state.cart.find(({ id }) => id === product.id)) {
         const filteredArray = this.state.cart.filter(
