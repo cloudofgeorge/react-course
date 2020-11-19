@@ -10,7 +10,7 @@ export const Layout = ({ children, title, aside }) => {
     <div className={styles.layout}>
       <Header />
       {title && <PageTitle>{title}</PageTitle>}
-      <MainContent>
+      <MainContent withAside={!!aside}>
         {aside && <aside>{aside}</aside>}
         <main>{children}</main>
       </MainContent>
