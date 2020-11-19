@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Switch,
   Redirect,
@@ -10,12 +10,12 @@ import { MainPage } from "./pages/main";
 import { ProductPage } from "./pages/product";
 
 export const AppRouter = () => (
-  <Router>
+  <BrowserRouter>
     <Switch>
       <Route exact path="/" component={MainPage} />
       <Route exact path="/catalog" component={CatalogPage} />
       <Route exact path="/catalog/:productID" component={ProductPage} />
       <Redirect to="/" path="*" />
     </Switch>
-  </Router>
+  </BrowserRouter>
 );
