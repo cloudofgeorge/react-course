@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./cart.module.scss";
-import { CartContext } from "../../../../context";
+import { removeCartItemAction } from "../../../../store/cart";
+import { connect } from "react-redux";
+import { getCartData } from "../../../../store/cart";
 
 class CartView extends React.Component {
   state = {
@@ -8,31 +10,29 @@ class CartView extends React.Component {
   };
 
   toggleWindow = () => {
-    const { productsInCart } = this.context;
+    const { cartData } = this.props;
 
-    if (productsInCart && productsInCart.length) {
+    if (cartData && cartData.length) {
       this.setState((prevState) => ({ isShow: !prevState.isShow }));
     }
   };
 
   render() {
-    const { productsInCart, removeFromCart } = this.context;
     const { isShow } = this.state;
+    const { cartData, removeCartItem } = this.props;
+
     return (
       <div className={styles.cart}>
-        <button
-          onClick={this.toggleWindow}
-          disabled={productsInCart.length === 0}
-        >
-          cart {productsInCart.length > 0 && productsInCart.length}
+        <button onClick={this.toggleWindow} disabled={cartData.length === 0}>
+          cart {cartData.length > 0 && cartData.length}
         </button>
 
-        {isShow && productsInCart.length > 0 && (
+        {isShow && cartData.length > 0 && (
           <div className={styles.cartWindow}>
-            {productsInCart.map((item) => (
+            {cartData.map((item) => (
               <div key={item.id} className={styles.cartItem}>
                 <span className={styles.cartItemName}>{item.title}</span>
-                <button onClick={() => removeFromCart(item)}>x</button>
+                <button onClick={() => removeCartItem(item)}>x</button>
               </div>
             ))}
           </div>
@@ -42,6 +42,12 @@ class CartView extends React.Component {
   }
 }
 
-CartView.contextType = CartContext;
+const mapStateToProps = (state) => ({
+  cartData: getCartData(state),
+});
 
-export const Cart = CartView;
+const mapDispatchToProps = (dispatch) => ({
+  removeCartItem: (catalogName) => dispatch(removeCartItemAction(catalogName)),
+});
+
+export const Cart = connect(mapStateToProps, mapDispatchToProps)(CartView);

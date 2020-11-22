@@ -3,8 +3,9 @@ import styles from "./product.module.scss";
 import { PRICE_SYMBOL } from "../../../constants";
 import { Link } from "react-router-dom";
 
-export const Product = ({ product, toggleCart, inCart }) => {
+export const Product = ({ product, addToCart, removeFromCart, inCart }) => {
   const { id, title, image, price } = product;
+
   return (
     <div className={styles.product}>
       <Link to={`/catalog/${id}`}>
@@ -26,9 +27,11 @@ export const Product = ({ product, toggleCart, inCart }) => {
         {PRICE_SYMBOL}
       </div>
       <div className={styles.bottom}>
-        <button onClick={() => toggleCart(product)}>
-          {inCart ? "Remove" : "Buy"}
-        </button>
+        {inCart ? (
+          <button onClick={() => removeFromCart(product)}>Remove</button>
+        ) : (
+          <button onClick={() => addToCart(product)}>Buy</button>
+        )}
       </div>
     </div>
   );
