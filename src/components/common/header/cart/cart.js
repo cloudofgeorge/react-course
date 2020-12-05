@@ -11,7 +11,7 @@ export const Cart = () => {
 
   const dispatch = useDispatch();
   const removeCartItem = useCallback(
-    (catalogName) => dispatch(removeCartItemAction(catalogName)),
+    (item) => dispatch(removeCartItemAction(item)),
     [dispatch]
   );
 

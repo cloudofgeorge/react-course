@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Layout } from "../components/common/layout";
 import { ProductsList, ProductsFilters } from "../components/products";
+import { getCatalogAction } from "../store/catalog";
 import {
+  getCatalogIsFetching,
   getCatalogData,
   getCatalogError,
-  getCatalogIsFetching,
-  getCatalogAction,
 } from "../store/catalog";
 import {
   addCartItemAction,
@@ -14,82 +14,89 @@ import {
   removeCartItemAction,
 } from "../store/cart";
 
-class CatalogPageView extends React.Component {
-  state = {
-    categories: [],
-    filter: "all",
+const createData = (value) => {
+  let i = 0;
+  while (i < 100000) i++;
+  console.log(value, i);
+  return value * 2;
+};
+
+export const CatalogPage = () => {
+  const [categories, setCategories] = useState([
+    "men clothing",
+    "electronics",
+    "jewelery",
+    "women clothing",
+  ]);
+
+  const [filter, setFilter] = useState("all");
+
+  const dispatch = useDispatch();
+
+  const catalogData = useSelector(getCatalogData);
+  const catalogIsFetching = useSelector(getCatalogIsFetching);
+  const catalogError = useSelector(getCatalogError);
+  const cartData = useSelector(getCartData);
+
+  const getCatalog = useCallback(
+    (categoryName) => dispatch(getCatalogAction(categoryName)),
+    [dispatch]
+  );
+
+  const addCartItem = useCallback(
+    (product) => dispatch(addCartItemAction(product)),
+    [dispatch]
+  );
+
+  const removeCartItem = useCallback(
+    (id) => dispatch(removeCartItemAction(id)),
+    [dispatch]
+  );
+
+  useEffect(() => {
+    getCatalog();
+  }, [getCatalog]);
+
+  useEffect(() => {
+    console.log(filter);
+  }, [filter]);
+
+  const data = useMemo(() => createData(5), []);
+
+  const getProducts = (categoryName) => {
+    getCatalog(categoryName);
   };
 
-  componentDidMount() {
-    this.props.getCatalog();
-    this.getCategories();
-  }
-
-  changeFilter = (event) => {
+  const changeFilter = (event) => {
     const value = event.target.value;
 
-    this.setState({ filter: value });
+    setFilter(value);
 
-    this.props.getCatalog(value !== "all" ? value : null);
+    getProducts(value !== "all" ? value : null);
   };
 
-  getCategories = () => {
-    this.setState({
-      categories: ["men clothing", "electronics", "jewelery", "women clothing"],
-    });
-  };
-
-  render() {
-    const { categories, filter } = this.state;
-    const {
-      catalogIsFetching,
-      catalogData,
-      catalogError,
-      addCartItem,
-      removeCartItem,
-      cartData,
-    } = this.props;
-
-    return (
-      <Layout
-        title="Products page"
-        aside={
-          <ProductsFilters
-            title="Types"
-            data={categories}
-            filter={filter}
-            onChange={this.changeFilter}
-          />
-        }
-      >
-        {catalogIsFetching && "loading"}
-        {!catalogIsFetching && !catalogError && (
-          <ProductsList
-            products={catalogData}
-            addToCart={addCartItem}
-            removeFromCart={removeCartItem}
-            cart={cartData}
-          />
-        )}
-      </Layout>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  catalogIsFetching: getCatalogIsFetching(state),
-  catalogData: getCatalogData(state),
-  catalogError: getCatalogError(state),
-  cartData: getCartData(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getCatalog: (catalogName) => dispatch(getCatalogAction(catalogName)),
-  addCartItem: (product) => dispatch(addCartItemAction(product)),
-  removeCartItem: (catalogName) => dispatch(removeCartItemAction(catalogName)),
-});
-
-export const CatalogPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CatalogPageView);
+  return (
+    <Layout
+      title="Products page"
+      aside={
+        <ProductsFilters
+          title="Types"
+          data={categories}
+          filter={filter}
+          onChange={changeFilter}
+        />
+      }
+    >
+      <div>useMemo example: {data}</div>
+      {catalogIsFetching && "loading"}
+      {!catalogIsFetching && !catalogError && (
+        <ProductsList
+          products={catalogData}
+          addCartItem={addCartItem}
+          removeCartItem={removeCartItem}
+          cart={cartData}
+        />
+      )}
+    </Layout>
+  );
+};
