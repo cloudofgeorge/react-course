@@ -13,6 +13,7 @@ import {
   getCartData,
   removeCartItemAction,
 } from "../store/cart";
+import { TestContext } from "../context";
 
 const createData = (value) => {
   let i = 0;
@@ -76,27 +77,29 @@ export const CatalogPage = () => {
   };
 
   return (
-    <Layout
-      title="Products page"
-      aside={
-        <ProductsFilters
-          title="Types"
-          data={categories}
-          filter={filter}
-          onChange={changeFilter}
-        />
-      }
-    >
-      <div>useMemo example: {data}</div>
-      {catalogIsFetching && "loading"}
-      {!catalogIsFetching && !catalogError && (
-        <ProductsList
-          products={catalogData}
-          addCartItem={addCartItem}
-          removeCartItem={removeCartItem}
-          cart={cartData}
-        />
-      )}
-    </Layout>
+    <TestContext.Provider value={1}>
+      <Layout
+        title="Products page"
+        aside={
+          <ProductsFilters
+            title="Types"
+            data={categories}
+            filter={filter}
+            onChange={changeFilter}
+          />
+        }
+      >
+        <div>useMemo example: {data}</div>
+        {catalogIsFetching && "loading"}
+        {!catalogIsFetching && !catalogError && (
+          <ProductsList
+            products={catalogData}
+            addCartItem={addCartItem}
+            removeCartItem={removeCartItem}
+            cart={cartData}
+          />
+        )}
+      </Layout>
+    </TestContext.Provider>
   );
 };
