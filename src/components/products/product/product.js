@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./product.module.scss";
 import { PRICE_SYMBOL } from "../../../constants";
 import { Link } from "react-router-dom";
-import { TestContext } from "../../../context";
 
 export const Product = ({ product, addToCart, removeFromCart, inCart }) => {
   const { id, title, image, price } = product;
-  const context = useContext(TestContext);
 
   return (
     <div className={styles.product}>
-      {context}
       <Link to={`/catalog/${id}`}>
         <picture>
           <img
