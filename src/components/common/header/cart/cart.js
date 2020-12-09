@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from "react";
-import styles from "./cart.module.scss";
-import { removeCartItemAction } from "../../../../store/cart";
-import { useDispatch, useSelector } from "react-redux";
-import { getCartData } from "../../../../store/cart";
+import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './cart.module.scss';
+import { removeCartItemAction, getCartData } from '../../../../store/cart';
 
 export const Cart = () => {
   const [isShow, setIsShow] = useState(false);
@@ -10,10 +9,7 @@ export const Cart = () => {
   const cartData = useSelector(getCartData);
 
   const dispatch = useDispatch();
-  const removeCartItem = useCallback(
-    (item) => dispatch(removeCartItemAction(item)),
-    [dispatch]
-  );
+  const removeCartItem = useCallback(item => dispatch(removeCartItemAction(item)), [dispatch]);
 
   const toggleWindow = () => {
     if (cartData && cartData.length) {
@@ -29,7 +25,7 @@ export const Cart = () => {
 
       {isShow && cartData.length > 0 && (
         <div className={styles.cartWindow}>
-          {cartData.map((item) => (
+          {cartData.map(item => (
             <div key={item.id} className={styles.cartItem}>
               <span className={styles.cartItemName}>{item.title}</span>
               <button onClick={() => removeCartItem(item)}>x</button>
