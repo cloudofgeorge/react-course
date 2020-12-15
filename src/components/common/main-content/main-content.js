@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Wrapper } from '../../ui/wrapper';
+import { Wrapper } from '../../ui';
 import styles from './main-content.module.scss';
 
 export const MainContent = ({ children, withAside }) => (
