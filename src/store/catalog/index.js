@@ -1,3 +1,3 @@
-export { catalogReducer } from "./reducer";
-export * from "./actions";
-export * from "./selectors";
+export { catalogReducer } from './reducer';
+export * from './actions';
+export * from './selectors';

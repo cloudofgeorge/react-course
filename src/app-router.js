@@ -1,13 +1,8 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-import { CatalogPage } from "./pages/catalog";
-import { MainPage } from "./pages/main";
-import { ProductPage } from "./pages/product";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { CatalogPage } from './pages/catalog';
+import { MainPage } from './pages/main';
+import { ProductPage } from './pages/product';
 
 export const AppRouter = () => (
   <Router>

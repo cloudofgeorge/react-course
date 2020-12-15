@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class ErrorBoundaryView extends React.Component {
   state = {
@@ -6,7 +6,12 @@ class ErrorBoundaryView extends React.Component {
   };
 
   componentDidCatch(error, errorInfo) {
+    const { onError } = this.props;
     this.setState({ isError: true });
+
+    if (onError) {
+      onError(error, errorInfo);
+    }
   }
 
   render() {

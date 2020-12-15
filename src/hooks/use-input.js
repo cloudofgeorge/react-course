@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export const useInput = (initialValue) => {
+export const useInput = initialValue => {
   const [state, setState] = useState(initialValue);
 
-  const onChange = (event) => {
+  const onChange = event => {
     setState(event.target.value);
   };
 

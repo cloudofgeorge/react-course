@@ -1,5 +1,5 @@
-import { initialState } from "./state";
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "./types";
+import { initialState } from './state';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from './types';
 
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {

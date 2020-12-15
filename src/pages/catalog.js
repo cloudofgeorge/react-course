@@ -22,7 +22,7 @@ export const CatalogPage = () => {
 
   const addCartItem = useCallback(product => dispatch(addCartItemAction(product)), [dispatch]);
 
-  const removeCartItem = useCallback(id => dispatch(removeCartItemAction(id)), [dispatch]);
+  const removeCartItem = useCallback(id => dispatch(removeCartItemAction(id)), []);
 
   useEffect(() => {
     getCatalog();

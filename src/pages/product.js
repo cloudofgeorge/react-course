@@ -1,6 +1,6 @@
-import React from "react";
-import { Layout } from "../components/common/layout";
-import { api } from "../api";
+import React from 'react';
+import { Layout } from '../components/common/layout';
+import { api } from '../api';
 
 class ProductPageView extends React.Component {
   state = {
@@ -21,17 +21,17 @@ class ProductPageView extends React.Component {
     if (match && match.params.productID) {
       api
         .get(`products/${match.params.productID}`)
-        .then((result) => {
+        .then(result => {
           this.setState({ data: result, isFetching: false, error: null });
         })
-        .catch((error) => {
+        .catch(error => {
           this.setState({ data: [], isFetching: false, error });
         });
     }
   };
 
   turnBack = () => {
-    this.props.history.push("/catalog");
+    this.props.history.push('/catalog');
   };
 
   render() {
@@ -39,7 +39,7 @@ class ProductPageView extends React.Component {
 
     return (
       <Layout title={data && data.title}>
-        {isFetching && "loading"}
+        {isFetching && 'loading'}
         {!isFetching && !error && data && (
           <>
             <div>
@@ -47,13 +47,7 @@ class ProductPageView extends React.Component {
             </div>
             <div>
               <picture>
-                <img
-                  width="100%"
-                  alt={data.title}
-                  src={data.image}
-                  itemProp="image"
-                  loading="lazy"
-                />
+                <img width="100%" alt={data.title} src={data.image} itemProp="image" loading="lazy" />
               </picture>
               <div>
                 <div>{data.description}</div>

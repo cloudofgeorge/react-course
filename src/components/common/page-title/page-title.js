@@ -1,5 +1,5 @@
-import React from "react";
-import { Wrapper } from "../../ui/wrapper";
+import React from 'react';
+import { Wrapper } from '../../ui/wrapper';
 
 export const PageTitle = ({ children }) => {
   if (!children) {
