@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "npm run lint:eslint && npm run lint:stylelint && ls-lint",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:fix": "npm run lint:eslint -- --fix && npm run lint:stylelint -- --fix && npm run lint:ls",
     "lint:stylelint": "stylelint 'src/**/*.{css,scss}'",
     "lint:stylelint:report": "stylelint 'src/**/*.{css,scss}' --output-file reports/stylelint-report.txt",
