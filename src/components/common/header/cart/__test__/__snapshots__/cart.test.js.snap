@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Cart> should match snapshot 1`] = `
+<div>
+  <div
+    class="cart"
+  >
+    <button
+      data-testid="cart-button"
+    >
+      cart 
+      15
+    </button>
+  </div>
+</div>
+`;

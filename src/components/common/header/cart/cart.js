@@ -19,16 +19,18 @@ export const Cart = () => {
 
   return (
     <div className={styles.cart}>
-      <button onClick={toggleWindow} disabled={cartData.length === 0}>
+      <button onClick={toggleWindow} disabled={cartData.length === 0} data-testid="cart-button">
         cart {cartData.length > 0 && cartData.length}
       </button>
 
       {isShow && cartData.length > 0 && (
-        <div className={styles.cartWindow}>
+        <div className={styles.cartWindow} data-testid="cart-window">
           {cartData.map(item => (
-            <div key={item.id} className={styles.cartItem}>
+            <div key={item.id} className={styles.cartItem} data-testid="cart-item">
               <span className={styles.cartItemName}>{item.title}</span>
-              <button onClick={() => removeCartItem(item)}>x</button>
+              <button onClick={() => removeCartItem(item)} data-testid="cart-remove-item-button">
+                x
+              </button>
             </div>
           ))}
         </div>

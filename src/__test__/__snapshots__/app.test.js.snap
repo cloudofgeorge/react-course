@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App> should match snapshot 1`] = `
+<div>
+  <div
+    class="layout"
+  >
+    <header
+      class="header"
+    >
+      <div
+        class="wrapper wrapper"
+      >
+        <div
+          class="leftSide"
+        >
+          <div
+            class="logo"
+          >
+            <a
+              class="link"
+              href="/"
+            >
+              <img
+                alt="logo"
+                src="/logo192.png"
+                width="100%"
+              />
+            </a>
+          </div>
+          <div
+            class="navigation"
+          >
+            <a
+              href="/catalog"
+            >
+              Catalog
+            </a>
+          </div>
+        </div>
+        <div>
+          <div
+            class="cart"
+          >
+            <button
+              data-testid="cart-button"
+              disabled=""
+            >
+              cart 
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div
+      class="wrapper mainContent"
+    >
+      <main>
+        <h1>
+          Welcome to our shop
+        </h1>
+      </main>
+    </div>
+    <footer
+      class="footer"
+    >
+      <div
+        class="wrapper"
+      >
+        footer content
+      </div>
+    </footer>
+  </div>
+</div>
+`;
